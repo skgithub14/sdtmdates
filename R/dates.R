@@ -52,7 +52,9 @@ reshape_pdates <- function (dates, output_sep = "/") {
 
   # customize the date component separator
   if (output_sep != "/") {
-    stringr::str_replace_all(dates2, pattern = "/", replacement = output_sep)
+    dates2 <- stringr::str_replace_all(dates2,
+                                       pattern = "\\/",
+                                       replacement = output_sep)
   }
 
   dates[which(!is.na(dates))] <- dates2
@@ -126,7 +128,14 @@ reshape_adates <- function (dates) {
 #' impute_pdates(dates, ptype = "end")
 impute_pdates <- function (dates, ptype, input_sep = "-") {
 
+  # if input separator is not the default, make them the default
   if (input_sep != "-") {
+
+    # if the input separator needs to be escaped for regex to find it
+    if (input_sep == ".") {
+      input_sep <- paste0("\\", input_sep)
+    }
+
     dates <- stringr::str_replace_all(dates,
                                       pattern = input_sep,
                                       replacement = "-")
@@ -184,7 +193,14 @@ impute_pdates <- function (dates, ptype, input_sep = "-") {
 #' trim_dates(dates)
 trim_dates <- function (dates, input_sep = "-") {
 
+  # input has a non-default date separator, make them the default
   if (input_sep != "-") {
+
+    # if the input separator needs to be escaped for regex to find it
+    if (input_sep == ".") {
+      input_sep <- paste0("\\", input_sep)
+    }
+
     dates <- stringr::str_replace_all(dates,
                                       pattern = input_sep,
                                       replacement = "-")
