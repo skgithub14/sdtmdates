@@ -1,0 +1,139 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# sdtmdates
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of {sdtmdates} is to provide a set of tools for statistical
+programmers to transform raw electronic data cut (EDC) dates into ISO
+8601 formatted dates for Study Date Tabulation Model (SDTM) data sets.
+
+## Installation
+
+You can install the development version of {sdtmdates} from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("skgithub14/sdtmdates")
+```
+
+## Example
+
+In this example, we start with a data frame with two columns, one with
+full dates and one with partial dates. The goal is to consolidate these
+dates into one ISO 8601 formatted date column.
+
+``` r
+library(sdtmdates)
+library(dplyr)
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
+
+raw_dates <- data.frame(
+  raw_full = c(
+    rep(NA, 8),
+    "02/05/2017",
+    "02-05-2017"
+  ),
+  raw_partial = c(
+    "UN-UNK-UNKN", 
+    "UN/UNK/UNKN",
+    "UN UNK UNKN",
+    "UN-UNK-2017",
+    "UN-Feb-2017",
+    "05-FEB-2017",
+    "05-UNK-2017",
+    "05-Feb-UNKN",
+    rep(NA, 2)
+  )
+)
+raw_dates
+#>      raw_full raw_partial
+#> 1        <NA> UN-UNK-UNKN
+#> 2        <NA> UN/UNK/UNKN
+#> 3        <NA> UN UNK UNKN
+#> 4        <NA> UN-UNK-2017
+#> 5        <NA> UN-Feb-2017
+#> 6        <NA> 05-FEB-2017
+#> 7        <NA> 05-UNK-2017
+#> 8        <NA> 05-Feb-UNKN
+#> 9  02/05/2017        <NA>
+#> 10 02-05-2017        <NA>
+```
+
+First, we will re-arrange the partial dates into the same format as the
+full dates using `reshape_pdates()`. That will let us combine the full
+and partial dates into one column with a MM/DD/YYYY format. Then, using
+`reshape_adates()`, we will converted the dates to the YYYY-MM-DD
+format.
+
+``` r
+working_dates <- raw_dates %>%
+  mutate(
+    partial = reshape_pdates(raw_partial),
+    all = coalesce(raw_full, partial),
+    all = reshape_adates(all)
+  )
+working_dates
+#>      raw_full raw_partial    partial        all
+#> 1        <NA> UN-UNK-UNKN UN/UN/UNKN UNKN-UN-UN
+#> 2        <NA> UN/UNK/UNKN UN/UN/UNKN UNKN-UN-UN
+#> 3        <NA> UN UNK UNKN UN/UN/UNKN UNKN-UN-UN
+#> 4        <NA> UN-UNK-2017 UN/UN/2017 2017-UN-UN
+#> 5        <NA> UN-Feb-2017 02/UN/2017 2017-02-UN
+#> 6        <NA> 05-FEB-2017 02/05/2017 2017-02-05
+#> 7        <NA> 05-UNK-2017 UN/05/2017 2017-UN-05
+#> 8        <NA> 05-Feb-UNKN 02/05/UNKN UNKN-02-05
+#> 9  02/05/2017        <NA>       <NA> 2017-02-05
+#> 10 02-05-2017        <NA>       <NA> 2017-02-05
+```
+
+For situations where missing date elements should be removed, use the
+`trim_dates()` function.
+
+``` r
+(trimmed_dates <-  mutate(working_dates, trimmed = trim_dates(all)))
+#>      raw_full raw_partial    partial        all    trimmed
+#> 1        <NA> UN-UNK-UNKN UN/UN/UNKN UNKN-UN-UN       <NA>
+#> 2        <NA> UN/UNK/UNKN UN/UN/UNKN UNKN-UN-UN       <NA>
+#> 3        <NA> UN UNK UNKN UN/UN/UNKN UNKN-UN-UN       <NA>
+#> 4        <NA> UN-UNK-2017 UN/UN/2017 2017-UN-UN       2017
+#> 5        <NA> UN-Feb-2017 02/UN/2017 2017-02-UN    2017-02
+#> 6        <NA> 05-FEB-2017 02/05/2017 2017-02-05 2017-02-05
+#> 7        <NA> 05-UNK-2017 UN/05/2017 2017-UN-05       2017
+#> 8        <NA> 05-Feb-UNKN 02/05/UNKN UNKN-02-05       <NA>
+#> 9  02/05/2017        <NA>       <NA> 2017-02-05 2017-02-05
+#> 10 02-05-2017        <NA>       <NA> 2017-02-05 2017-02-05
+```
+
+If imputed dates are needed, use the `impute_pdates()` function. Both
+start and end dates can be imputed using standard imputation rules.
+
+``` r
+imputed_dates <- working_dates %>%
+  mutate(
+    start = impute_pdates(all, ptype = "start"),
+    end = impute_pdates(all, ptype = "end")
+  )
+imputed_dates
+#>      raw_full raw_partial    partial        all      start        end
+#> 1        <NA> UN-UNK-UNKN UN/UN/UNKN UNKN-UN-UN       <NA>       <NA>
+#> 2        <NA> UN/UNK/UNKN UN/UN/UNKN UNKN-UN-UN       <NA>       <NA>
+#> 3        <NA> UN UNK UNKN UN/UN/UNKN UNKN-UN-UN       <NA>       <NA>
+#> 4        <NA> UN-UNK-2017 UN/UN/2017 2017-UN-UN 2017-01-01 2017-12-31
+#> 5        <NA> UN-Feb-2017 02/UN/2017 2017-02-UN 2017-02-01 2017-02-28
+#> 6        <NA> 05-FEB-2017 02/05/2017 2017-02-05 2017-02-05 2017-02-05
+#> 7        <NA> 05-UNK-2017 UN/05/2017 2017-UN-05 2017-01-05 2017-12-05
+#> 8        <NA> 05-Feb-UNKN 02/05/UNKN UNKN-02-05       <NA>       <NA>
+#> 9  02/05/2017        <NA>       <NA> 2017-02-05 2017-02-05 2017-02-05
+#> 10 02-05-2017        <NA>       <NA> 2017-02-05 2017-02-05 2017-02-05
+```

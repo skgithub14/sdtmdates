@@ -1,0 +1,93 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# sdtmdates
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of {sdtmdates} is to provide a set of tools for statistical programmers to transform raw electronic data cut (EDC) dates into ISO 8601 formatted dates for Study Date Tabulation Model (SDTM) data sets.
+
+## Installation
+
+You can install the development version of {sdtmdates} from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("skgithub14/sdtmdates")
+```
+
+## Example
+
+In this example, we start with a data frame with two columns, one with full dates and one with partial dates. The goal is to consolidate these dates into one ISO 8601 formatted date column. 
+
+```{r example1}
+library(sdtmdates)
+library(dplyr)
+
+raw_dates <- data.frame(
+  raw_full = c(
+    rep(NA, 8),
+    "02/05/2017",
+    "02-05-2017"
+  ),
+  raw_partial = c(
+    "UN-UNK-UNKN", 
+    "UN/UNK/UNKN",
+    "UN UNK UNKN",
+    "UN-UNK-2017",
+    "UN-Feb-2017",
+    "05-FEB-2017",
+    "05-UNK-2017",
+    "05-Feb-UNKN",
+    rep(NA, 2)
+  )
+)
+raw_dates
+```
+
+First, we will re-arrange the partial dates into the same format as the full dates using `reshape_pdates()`. That will let us combine the full and partial dates into one column with a MM/DD/YYYY format. Then, using `reshape_adates()`, we will converted the dates to the YYYY-MM-DD format.
+
+```{r example2}
+working_dates <- raw_dates %>%
+  mutate(
+    partial = reshape_pdates(raw_partial),
+    all = coalesce(raw_full, partial),
+    all = reshape_adates(all)
+  )
+working_dates
+```
+
+
+For situations where missing date elements should be removed, use the `trim_dates()` function.
+
+```{r example3}
+(trimmed_dates <-  mutate(working_dates, trimmed = trim_dates(all)))
+```
+
+
+If imputed dates are needed, use the `impute_pdates()` function. Both start and end dates can be imputed using standard imputation rules.
+
+```{r example4}
+imputed_dates <- working_dates %>%
+  mutate(
+    start = impute_pdates(all, ptype = "start"),
+    end = impute_pdates(all, ptype = "end")
+  )
+imputed_dates
+```
+
+
+
