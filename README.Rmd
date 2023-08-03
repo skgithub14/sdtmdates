@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/skgithub14/sdtmdates/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/skgithub14/sdtmdates/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of {sdtmdates} is to provide a set of tools for statistical programmers to transform raw electronic data cut (EDC) dates into ISO 8601 formatted dates for Study Data Tabulation Model (SDTM) data sets.
+The goal of {sdtmdates} is to provide a set of tools for statistical programmers to transform raw electronic data cut (EDC) dates into ISO 8601 formatted dates for Study Data Tabulation Model (SDTM) data sets. The tools include utility functions to reshaping, trimming, and imputing date values.
 
 ## Installation
 
@@ -34,7 +34,7 @@ devtools::install_github("skgithub14/sdtmdates")
 
 In this example, we start with a data frame with two columns, one with full dates and one with partial dates. The goal is to consolidate these dates into one ISO 8601 formatted date column. 
 
-```{r example1}
+```{r example1, message=FALSE}
 library(sdtmdates)
 library(dplyr)
 library(knitr)

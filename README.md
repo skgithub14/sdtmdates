@@ -11,6 +11,8 @@
 The goal of {sdtmdates} is to provide a set of tools for statistical
 programmers to transform raw electronic data cut (EDC) dates into ISO
 8601 formatted dates for Study Data Tabulation Model (SDTM) data sets.
+The tools include utility functions to reshaping, trimming, and imputing
+date values.
 
 ## Installation
 
@@ -31,14 +33,6 @@ dates into one ISO 8601 formatted date column.
 ``` r
 library(sdtmdates)
 library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 library(knitr)
 
 raw_dates <- data.frame(
