@@ -4,6 +4,8 @@
 # sdtmdates
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/skgithub14/sdtmdates/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/skgithub14/sdtmdates/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of {sdtmdates} is to provide a set of tools for statistical
