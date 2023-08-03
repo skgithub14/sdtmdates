@@ -12,6 +12,7 @@ Statistical programmers are required to transform data snapshots from an electro
 Useful links:
 \itemize{
   \item \url{https://github.com/skgithub14/sdtmdates}
+  \item \url{https://skgithub14.github.io/sdtmdates/}
   \item Report bugs at \url{https://github.com/skgithub14/sdtmdates/issues}
 }
 

@@ -23,5 +23,5 @@ Imports:
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-URL: https://github.com/skgithub14/sdtmdates
+URL: https://github.com/skgithub14/sdtmdates, https://skgithub14.github.io/sdtmdates/
 BugReports: https://github.com/skgithub14/sdtmdates/issues
