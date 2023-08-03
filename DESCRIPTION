@@ -1,0 +1,16 @@
+Package: sdtmdates
+Title: Transform and Impute Full and Partial Dates for SDTM
+Version: 0.0.0.9000
+Authors@R: 
+    person("Stephen", "Knapp", email = "stephen@knappconsultingllc.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-5101-4555"))
+Description: Statistical programmers are required to transform data snapshots 
+    from an electronic data cut (EDC) into Clinical Data Interchange Standards 
+    Consortium (CDSIC) Study Date Tabulation Model (SDTM) compliant data sets 
+    per the guidelines in the SDTM Implementation Guide (SDTMIG). {sdtmdates} 
+    provides utility functions for statistical programmers to convert full and 
+    partial dates into SDTMIG compliant dates.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
