@@ -19,3 +19,7 @@ the ISO 8601 format (\code{"YYYY-MM-DD"}).
 \details{
 The date component separator in the input vector \code{dates} is irrelevant.
 }
+\examples{
+dates <- c("02/05/2017", "UN/UN/2017", "02-05-2017", NA)
+reshape_adates(dates)
+}

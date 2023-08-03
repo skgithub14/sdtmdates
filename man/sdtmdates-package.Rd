@@ -6,7 +6,15 @@
 \alias{sdtmdates-package}
 \title{sdtmdates: Transform and Impute Full and Partial Dates for SDTM}
 \description{
-Statistical programmers are required to transform data snapshots from an electronic data cut (EDC) into Clinical Data Interchange Standards Consortium (CDSIC) Study Date Tabulation Model (SDTM) compliant data sets per the guidelines in the SDTM Implementation Guide (SDTMIG). {sdtmdates} provides utility functions for statistical programmers to convert full and partial dates into SDTMIG compliant dates.
+Statistical programmers are required to transform data snapshots from an electronic data cut (EDC) into Clinical Data Interchange Standards Consortium (CDSIC) Study Data Tabulation Model (SDTM) compliant data sets per the guidelines in the SDTM Implementation Guide (SDTMIG). {sdtmdates} provides utility functions for statistical programmers to convert full and partial dates into SDTMIG compliant dates.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/skgithub14/sdtmdates}
+  \item Report bugs at \url{https://github.com/skgithub14/sdtmdates/issues}
+}
+
 }
 \author{
 \strong{Maintainer}: Stephen Knapp \email{stephen@knappconsultingllc.com} (\href{https://orcid.org/0000-0002-5101-4555}{ORCID})

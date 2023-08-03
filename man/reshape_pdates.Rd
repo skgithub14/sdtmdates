@@ -29,3 +29,16 @@ SDTM date operations easier
 \item The case of the input month abbreviation does not matter
 }
 }
+\examples{
+dates <- c(
+ "UN-UNK-UNKN",
+ "UN/UNK/UNKN",
+ "UN-UNK-2017",
+ "UN-Feb-2017",
+ "05-Feb-2017",
+ "05-UNK-2017",
+ "05-Feb-UNKN",
+ NA
+)
+reshape_pdates(dates)
+}

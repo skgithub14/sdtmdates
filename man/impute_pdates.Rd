@@ -21,9 +21,22 @@ a date vector of imputed dates in the format YYYY-MM-DD
 }
 \description{
 Partial dates should be the format UNKN-UN-UN or some combination of those
-characters and numbers (ie 2017-UN-UN). Dates with no information as converted
-to \code{NA}. For start dates, missing days are assumed to be the first of the
-month while missing months are assumed to be January. For end dates, missing
-days are assumed to be the last day of the month and missing months are
-assumed to be December.
+characters and numbers (ie 2017-UN-UN). Dates with no information as
+converted to \code{NA}. For start dates, missing days are assumed to be the first
+of the month while missing months are assumed to be January. For end dates,
+missing days are assumed to be the last day of the month and missing months
+are assumed to be December.
+}
+\examples{
+dates <- c(
+  "UNKN-UN-UN",
+  "2017-UN-UN",
+  "2017-02-UN",
+  "2017-UN-05",
+  "2017-09-03",
+  "UNKN-07-14",
+  NA
+)
+impute_pdates(dates, ptype = "start")
+impute_pdates(dates, ptype = "end")
 }

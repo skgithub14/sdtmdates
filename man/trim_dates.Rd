@@ -22,3 +22,15 @@ Values of \code{"UNKN-UN-UN"} are converted to \code{NA}. Values where only
 the month and day are known are converted to just the year, ie \code{"2017-UN-01"}
 converts to \code{"2017"}. Full dates are not modified.
 }
+\examples{
+dates <- c(
+  "UNKN-UN-UN",
+  "2017-UN-UN",
+  "2017-02-UN",
+  "2017-UN-05",
+  "2017-09-03",
+  "UNKN-07-14",
+  NA
+)
+trim_dates(dates)
+}

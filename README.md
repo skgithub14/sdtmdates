@@ -8,7 +8,7 @@
 
 The goal of {sdtmdates} is to provide a set of tools for statistical
 programmers to transform raw electronic data cut (EDC) dates into ISO
-8601 formatted dates for Study Date Tabulation Model (SDTM) data sets.
+8601 formatted dates for Study Data Tabulation Model (SDTM) data sets.
 
 ## Installation
 

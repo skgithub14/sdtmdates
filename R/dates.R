@@ -18,7 +18,7 @@
 #' @returns a character vector of partial dates
 #' @export
 #'
-#' @example
+#' @examples
 #' dates <- c(
 #'  "UN-UNK-UNKN",
 #'  "UN/UNK/UNKN",
@@ -72,7 +72,7 @@ reshape_pdates <- function (dates, output_sep = "/") {
 #' @returns a character vector of dates
 #' @export
 #'
-#' @example
+#' @examples
 #' dates <- c("02/05/2017", "UN/UN/2017", "02-05-2017", NA)
 #' reshape_adates(dates)
 reshape_adates <- function (dates) {
@@ -96,11 +96,11 @@ reshape_adates <- function (dates) {
 #' Impute start or end dates
 #'
 #' Partial dates should be the format UNKN-UN-UN or some combination of those
-#' characters and numbers (ie 2017-UN-UN). Dates with no information as converted
-#' to `NA`. For start dates, missing days are assumed to be the first of the
-#' month while missing months are assumed to be January. For end dates, missing
-#' days are assumed to be the last day of the month and missing months are
-#' assumed to be December.
+#' characters and numbers (ie 2017-UN-UN). Dates with no information as
+#' converted to `NA`. For start dates, missing days are assumed to be the first
+#' of the month while missing months are assumed to be January. For end dates,
+#' missing days are assumed to be the last day of the month and missing months
+#' are assumed to be December.
 #'
 #' @param dates a character vector of partial dates (which could also contain
 #'  full dates) in the format YYYY-MM-DD
@@ -112,7 +112,7 @@ reshape_adates <- function (dates) {
 #' @returns a date vector of imputed dates in the format YYYY-MM-DD
 #' @export
 #'
-#' @example
+#' @examples
 #' dates <- c(
 #'   "UNKN-UN-UN",
 #'   "2017-UN-UN",
@@ -127,7 +127,9 @@ reshape_adates <- function (dates) {
 impute_pdates <- function (dates, ptype, input_sep = "-") {
 
   if (input_sep != "-") {
-    dates <- stringr::str_replace_all(dates, pattern = input_sep, replacement = "-")
+    dates <- stringr::str_replace_all(dates,
+                                      pattern = input_sep,
+                                      replacement = "-")
   }
 
   # return NA for UNKN-UN-UN dates
@@ -143,8 +145,8 @@ impute_pdates <- function (dates, ptype, input_sep = "-") {
     dates <- stringr::str_replace(dates, pattern = "-UN-", replacement = "-12-")
     eom <- dates[stringr::str_which(dates, pattern = "UN$")]
     eom <- stringr::str_replace(eom, pattern = "UN$", replacement = "01")
-    eom <- as.character(as.Date(eom) + lubridate::period(num = 1, units = "month") - 1)
-    dates[stringr::str_which(dates, pattern = "UN$")] <- eom
+    eom <- as.Date(eom) + lubridate::period(num = 1, units = "month") - 1
+    dates[stringr::str_which(dates, pattern = "UN$")] <- as.character(eom)
   }
 
   # convert to date format
@@ -169,7 +171,7 @@ impute_pdates <- function (dates, ptype, input_sep = "-") {
 #' @returns a character vector of trimmed dates
 #' @export
 #'
-#' @example
+#' @examples
 #' dates <- c(
 #'   "UNKN-UN-UN",
 #'   "2017-UN-UN",
@@ -183,7 +185,9 @@ impute_pdates <- function (dates, ptype, input_sep = "-") {
 trim_dates <- function (dates, input_sep = "-") {
 
   if (input_sep != "-") {
-    dates <- stringr::str_replace_all(dates, pattern = input_sep, replacement = "-")
+    dates <- stringr::str_replace_all(dates,
+                                      pattern = input_sep,
+                                      replacement = "-")
   }
 
   # convert anything with an unknown year to NA
