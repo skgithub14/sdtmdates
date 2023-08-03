@@ -37,6 +37,7 @@ library(dplyr)
 #> The following objects are masked from 'package:base':
 #> 
 #>     intersect, setdiff, setequal, union
+library(knitr)
 
 raw_dates <- data.frame(
   raw_full = c(
@@ -56,19 +57,21 @@ raw_dates <- data.frame(
     rep(NA, 2)
   )
 )
-raw_dates
-#>      raw_full raw_partial
-#> 1        <NA> UN-UNK-UNKN
-#> 2        <NA> UN/UNK/UNKN
-#> 3        <NA> UN UNK UNKN
-#> 4        <NA> UN-UNK-2017
-#> 5        <NA> UN-Feb-2017
-#> 6        <NA> 05-FEB-2017
-#> 7        <NA> 05-UNK-2017
-#> 8        <NA> 05-Feb-UNKN
-#> 9  02/05/2017        <NA>
-#> 10 02-05-2017        <NA>
+kable(raw_dates)
 ```
+
+| raw_full   | raw_partial |
+|:-----------|:------------|
+| NA         | UN-UNK-UNKN |
+| NA         | UN/UNK/UNKN |
+| NA         | UN UNK UNKN |
+| NA         | UN-UNK-2017 |
+| NA         | UN-Feb-2017 |
+| NA         | 05-FEB-2017 |
+| NA         | 05-UNK-2017 |
+| NA         | 05-Feb-UNKN |
+| 02/05/2017 | NA          |
+| 02-05-2017 | NA          |
 
 First, we will re-arrange the partial dates into the same format as the
 full dates using `reshape_pdates()`. That will let us combine the full
@@ -83,37 +86,42 @@ working_dates <- raw_dates %>%
     all = coalesce(raw_full, partial),
     all = reshape_adates(all)
   )
-working_dates
-#>      raw_full raw_partial    partial        all
-#> 1        <NA> UN-UNK-UNKN UN/UN/UNKN UNKN-UN-UN
-#> 2        <NA> UN/UNK/UNKN UN/UN/UNKN UNKN-UN-UN
-#> 3        <NA> UN UNK UNKN UN/UN/UNKN UNKN-UN-UN
-#> 4        <NA> UN-UNK-2017 UN/UN/2017 2017-UN-UN
-#> 5        <NA> UN-Feb-2017 02/UN/2017 2017-02-UN
-#> 6        <NA> 05-FEB-2017 02/05/2017 2017-02-05
-#> 7        <NA> 05-UNK-2017 UN/05/2017 2017-UN-05
-#> 8        <NA> 05-Feb-UNKN 02/05/UNKN UNKN-02-05
-#> 9  02/05/2017        <NA>       <NA> 2017-02-05
-#> 10 02-05-2017        <NA>       <NA> 2017-02-05
+kable(working_dates)
 ```
+
+| raw_full   | raw_partial | partial    | all        |
+|:-----------|:------------|:-----------|:-----------|
+| NA         | UN-UNK-UNKN | UN/UN/UNKN | UNKN-UN-UN |
+| NA         | UN/UNK/UNKN | UN/UN/UNKN | UNKN-UN-UN |
+| NA         | UN UNK UNKN | UN/UN/UNKN | UNKN-UN-UN |
+| NA         | UN-UNK-2017 | UN/UN/2017 | 2017-UN-UN |
+| NA         | UN-Feb-2017 | 02/UN/2017 | 2017-02-UN |
+| NA         | 05-FEB-2017 | 02/05/2017 | 2017-02-05 |
+| NA         | 05-UNK-2017 | UN/05/2017 | 2017-UN-05 |
+| NA         | 05-Feb-UNKN | 02/05/UNKN | UNKN-02-05 |
+| 02/05/2017 | NA          | NA         | 2017-02-05 |
+| 02-05-2017 | NA          | NA         | 2017-02-05 |
 
 For situations where missing date elements should be removed, use the
 `trim_dates()` function.
 
 ``` r
-(trimmed_dates <-  mutate(working_dates, trimmed = trim_dates(all)))
-#>      raw_full raw_partial    partial        all    trimmed
-#> 1        <NA> UN-UNK-UNKN UN/UN/UNKN UNKN-UN-UN       <NA>
-#> 2        <NA> UN/UNK/UNKN UN/UN/UNKN UNKN-UN-UN       <NA>
-#> 3        <NA> UN UNK UNKN UN/UN/UNKN UNKN-UN-UN       <NA>
-#> 4        <NA> UN-UNK-2017 UN/UN/2017 2017-UN-UN       2017
-#> 5        <NA> UN-Feb-2017 02/UN/2017 2017-02-UN    2017-02
-#> 6        <NA> 05-FEB-2017 02/05/2017 2017-02-05 2017-02-05
-#> 7        <NA> 05-UNK-2017 UN/05/2017 2017-UN-05       2017
-#> 8        <NA> 05-Feb-UNKN 02/05/UNKN UNKN-02-05       <NA>
-#> 9  02/05/2017        <NA>       <NA> 2017-02-05 2017-02-05
-#> 10 02-05-2017        <NA>       <NA> 2017-02-05 2017-02-05
+trimmed_dates <-  mutate(working_dates, trimmed = trim_dates(all))
+kable(trimmed_dates)
 ```
+
+| raw_full   | raw_partial | partial    | all        | trimmed    |
+|:-----------|:------------|:-----------|:-----------|:-----------|
+| NA         | UN-UNK-UNKN | UN/UN/UNKN | UNKN-UN-UN | NA         |
+| NA         | UN/UNK/UNKN | UN/UN/UNKN | UNKN-UN-UN | NA         |
+| NA         | UN UNK UNKN | UN/UN/UNKN | UNKN-UN-UN | NA         |
+| NA         | UN-UNK-2017 | UN/UN/2017 | 2017-UN-UN | 2017       |
+| NA         | UN-Feb-2017 | 02/UN/2017 | 2017-02-UN | 2017-02    |
+| NA         | 05-FEB-2017 | 02/05/2017 | 2017-02-05 | 2017-02-05 |
+| NA         | 05-UNK-2017 | UN/05/2017 | 2017-UN-05 | 2017       |
+| NA         | 05-Feb-UNKN | 02/05/UNKN | UNKN-02-05 | NA         |
+| 02/05/2017 | NA          | NA         | 2017-02-05 | 2017-02-05 |
+| 02-05-2017 | NA          | NA         | 2017-02-05 | 2017-02-05 |
 
 If imputed dates are needed, use the `impute_pdates()` function. Both
 start and end dates can be imputed using standard imputation rules.
@@ -124,16 +132,18 @@ imputed_dates <- working_dates %>%
     start = impute_pdates(all, ptype = "start"),
     end = impute_pdates(all, ptype = "end")
   )
-imputed_dates
-#>      raw_full raw_partial    partial        all      start        end
-#> 1        <NA> UN-UNK-UNKN UN/UN/UNKN UNKN-UN-UN       <NA>       <NA>
-#> 2        <NA> UN/UNK/UNKN UN/UN/UNKN UNKN-UN-UN       <NA>       <NA>
-#> 3        <NA> UN UNK UNKN UN/UN/UNKN UNKN-UN-UN       <NA>       <NA>
-#> 4        <NA> UN-UNK-2017 UN/UN/2017 2017-UN-UN 2017-01-01 2017-12-31
-#> 5        <NA> UN-Feb-2017 02/UN/2017 2017-02-UN 2017-02-01 2017-02-28
-#> 6        <NA> 05-FEB-2017 02/05/2017 2017-02-05 2017-02-05 2017-02-05
-#> 7        <NA> 05-UNK-2017 UN/05/2017 2017-UN-05 2017-01-05 2017-12-05
-#> 8        <NA> 05-Feb-UNKN 02/05/UNKN UNKN-02-05       <NA>       <NA>
-#> 9  02/05/2017        <NA>       <NA> 2017-02-05 2017-02-05 2017-02-05
-#> 10 02-05-2017        <NA>       <NA> 2017-02-05 2017-02-05 2017-02-05
+kable(imputed_dates)
 ```
+
+| raw_full   | raw_partial | partial    | all        | start      | end        |
+|:-----------|:------------|:-----------|:-----------|:-----------|:-----------|
+| NA         | UN-UNK-UNKN | UN/UN/UNKN | UNKN-UN-UN | NA         | NA         |
+| NA         | UN/UNK/UNKN | UN/UN/UNKN | UNKN-UN-UN | NA         | NA         |
+| NA         | UN UNK UNKN | UN/UN/UNKN | UNKN-UN-UN | NA         | NA         |
+| NA         | UN-UNK-2017 | UN/UN/2017 | 2017-UN-UN | 2017-01-01 | 2017-12-31 |
+| NA         | UN-Feb-2017 | 02/UN/2017 | 2017-02-UN | 2017-02-01 | 2017-02-28 |
+| NA         | 05-FEB-2017 | 02/05/2017 | 2017-02-05 | 2017-02-05 | 2017-02-05 |
+| NA         | 05-UNK-2017 | UN/05/2017 | 2017-UN-05 | 2017-01-05 | 2017-12-05 |
+| NA         | 05-Feb-UNKN | 02/05/UNKN | UNKN-02-05 | NA         | NA         |
+| 02/05/2017 | NA          | NA         | 2017-02-05 | 2017-02-05 | 2017-02-05 |
+| 02-05-2017 | NA          | NA         | 2017-02-05 | 2017-02-05 | 2017-02-05 |
