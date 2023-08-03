@@ -163,8 +163,8 @@ impute_pdates <- function (dates, ptype, input_sep = "-") {
 #'
 #' @param dates a character vector of full or partial dates in the format
 #'  YYYY-MM-DD, for unknown dates it will be a variant of UNKN-UN-UN
-#' @param sep the character that separates date components in the input vector
-#'  `dates`, default is `"-"`
+#' @param input_sep the character that separates date components in the input
+#'  vector `dates`, default is `"-"`
 #'
 #' @returns a character vector of trimmed dates
 #' @export

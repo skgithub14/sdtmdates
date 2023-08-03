@@ -10,8 +10,8 @@ trim_dates(dates, input_sep = "-")
 \item{dates}{a character vector of full or partial dates in the format
 YYYY-MM-DD, for unknown dates it will be a variant of UNKN-UN-UN}
 
-\item{sep}{the character that separates date components in the input vector
-\code{dates}, default is \code{"-"}}
+\item{input_sep}{the character that separates date components in the input
+vector \code{dates}, default is \code{"-"}}
 }
 \value{
 a character vector of trimmed dates
