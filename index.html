@@ -170,7 +170,7 @@
 </tr>
 </tbody>
 </table>
-<p>First, we will re-arrange the partial dates into the same format as the full dates using <code><a href="reference/reshape_pdates.html">reshape_pdates()</a></code>. That will let us combine the full and partial dates into one column with a MM/DD/YYYY format. Then, using <code><a href="reference/reshape_adates.html">reshape_adates()</a></code>, we will converted the dates to the YYYY-MM-DD format.</p>
+<p>First, we will re-arrange the partial dates into the same format as the full dates using <code><a href="reference/reshape_pdates.html">reshape_pdates()</a></code>. That will let us combine the full and partial dates into one column with a MM/DD/YYYY format. Then, using <code><a href="reference/reshape_adates.html">reshape_adates()</a></code>, we will convert all dates to the YYYY-MM-DD format.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">working_dates</span> <span class="op">&lt;-</span> <span class="va">raw_dates</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">mutate</span><span class="op">(</span></span>
