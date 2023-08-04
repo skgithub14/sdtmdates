@@ -17,9 +17,10 @@ vector \code{dates}, default is \code{"-"}}
 a character vector of trimmed partial dates and full dates
 }
 \description{
-Trims \code{"2017-UN-UN"} to \code{"2017"} and trims \code{"2017-05-UN"} to \code{"2017-05"}.
+Removes unknown elements from a partial date. For example, \code{"2017-UN-UN"}
+is trimmed to \code{"2017"} and \code{"2017-05-UN"} is trimmed to \code{"2017-05"}.
 Values of \code{"UNKN-UN-UN"} are converted to \code{NA}. Values where only
-the month and day are known are converted to just the year, ie \code{"2017-UN-01"}
+the year and day are known are converted to just the year, ie \code{"2017-UN-01"}
 converts to \code{"2017"}. Full dates are not modified.
 }
 \examples{

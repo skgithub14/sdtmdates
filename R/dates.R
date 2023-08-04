@@ -105,12 +105,13 @@ reshape_adates <- function (dates) {
 
 #' Impute start or end dates
 #'
-#' Partial dates should be the format UNKN-UN-UN or some combination of those
-#' characters and numbers (ie 2017-UN-UN). Dates with no information as
-#' converted to `NA`. For start dates, missing days are assumed to be the first
-#' of the month while missing months are assumed to be January. For end dates,
-#' missing days are assumed to be the last day of the month and missing months
-#' are assumed to be December.
+#' Imputes missing date elements for start or end dates. Partial dates should be
+#' in the format `"UNKN-UN-UN"` or some combination of those characters and
+#' numbers (ie `"2017-UN-UN"`). Dates with no information or dates with a
+#' missing year will be converted to `NA`. For start dates, missing days are
+#' assumed to be the first of the month while missing months are assumed to be
+#' January. For end dates, missing days are assumed to be the last day of the
+#' month and missing months are assumed to be December.
 #'
 #' @param dates a character vector of partial dates (which could also contain
 #'  full dates) in the format YYYY-MM-DD
@@ -175,9 +176,10 @@ impute_pdates <- function (dates, ptype, input_sep = "-") {
 
 #' Trim unknown elements in partial dates
 #'
-#' Trims `"2017-UN-UN"` to `"2017"` and trims `"2017-05-UN"` to `"2017-05"`.
+#' Removes unknown elements from a partial date. For example, `"2017-UN-UN"`
+#' is trimmed to `"2017"` and `"2017-05-UN"` is trimmed to `"2017-05"`.
 #' Values of `"UNKN-UN-UN"` are converted to `NA`. Values where only
-#' the month and day are known are converted to just the year, ie `"2017-UN-01"`
+#' the year and day are known are converted to just the year, ie `"2017-UN-01"`
 #' converts to `"2017"`. Full dates are not modified.
 #'
 #' @param dates a character vector of partial dates in the format `"UNKN-UN-UN"`
