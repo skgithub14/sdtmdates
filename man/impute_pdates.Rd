@@ -20,12 +20,13 @@ default is \code{"-"}}
 a date vector of imputed dates in the format YYYY-MM-DD
 }
 \description{
-Partial dates should be the format UNKN-UN-UN or some combination of those
-characters and numbers (ie 2017-UN-UN). Dates with no information as
-converted to \code{NA}. For start dates, missing days are assumed to be the first
-of the month while missing months are assumed to be January. For end dates,
-missing days are assumed to be the last day of the month and missing months
-are assumed to be December.
+Imputes missing date elements for start or end dates. Partial dates should be
+in the format \code{"UNKN-UN-UN"} or some combination of those characters and
+numbers (ie \code{"2017-UN-UN"}). Dates with no information or dates with a
+missing year will be converted to \code{NA}. For start dates, missing days are
+assumed to be the first of the month while missing months are assumed to be
+January. For end dates, missing days are assumed to be the last day of the
+month and missing months are assumed to be December.
 }
 \examples{
 dates <- c(
