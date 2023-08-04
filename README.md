@@ -6,6 +6,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/skgithub14/sdtmdates/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/skgithub14/sdtmdates/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/skgithub14/sdtmdates/branch/main/graph/badge.svg)](https://app.codecov.io/gh/skgithub14/sdtmdates?branch=main)
 <!-- badges: end -->
 
 The goal of {sdtmdates} is to provide a set of tools for statistical
