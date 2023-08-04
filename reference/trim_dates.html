@@ -16,7 +16,7 @@ converts to "2017". Full dates are not modified.'><meta property="og:image" cont
     
     <a class="navbar-brand me-2" href="../index.html">sdtmdates</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,8 +66,8 @@ converts to <code>"2017"</code>. Full dates are not modified.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>dates</dt>
-<dd><p>a character vector of full or partial dates in the format
-YYYY-MM-DD, for unknown dates it will be a variant of UNKN-UN-UN</p></dd>
+<dd><p>a character vector of partial dates in the format <code>"UNKN-UN-UN"</code>
+(<code>"YYYY-MM-DD"</code>); full dates can also be included</p></dd>
 
 
 <dt>input_sep</dt>
@@ -79,7 +79,7 @@ vector <code>dates</code>, default is <code>"-"</code></p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>a character vector of trimmed dates</p>
+<p>a character vector of trimmed partial dates and full dates</p>
     </div>
 
     <div class="section level2">
