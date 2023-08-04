@@ -13,14 +13,16 @@ knitr::opts_chunk$set(
 )
 ```
 
-# sdtmdates
+
+# sdtmdates <a href="https://skgithub14.github.io/sdtmdates/"><img src="man/figures/logo.png" align="right" height="139" alt="sdtmdates website" /></a>
+
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/skgithub14/sdtmdates/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/skgithub14/sdtmdates/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/skgithub14/sdtmdates/branch/main/graph/badge.svg)](https://app.codecov.io/gh/skgithub14/sdtmdates?branch=main)
 <!-- badges: end -->
 
-The goal of {sdtmdates} is to provide a set of tools for statistical programmers to transform raw electronic data cut (EDC) dates into ISO 8601 formatted dates for Study Data Tabulation Model (SDTM) data sets. The tools include utility functions to reshaping, trimming, and imputing date values.
+The goal of {sdtmdates} is to provide a set of tools for statistical programmers to transform raw electronic data cut (EDC) dates into ISO 8601 formatted dates for Study Data Tabulation Model (SDTM) data sets. The tools include utility functions for reshaping, trimming, and imputing date values.
 
 ## Installation
 

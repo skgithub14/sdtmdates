@@ -6,6 +6,8 @@
 \alias{sdtmdates-package}
 \title{sdtmdates: Transform and Impute Full and Partial Dates for SDTM}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Statistical programmers are required to transform data snapshots from an electronic data cut (EDC) into Clinical Data Interchange Standards Consortium (CDSIC) Study Data Tabulation Model (SDTM) compliant data sets per the guidelines in the SDTM Implementation Guide (SDTMIG). {sdtmdates} provides utility functions for statistical programmers to convert full and partial dates into SDTMIG compliant dates.
 }
 \seealso{

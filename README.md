@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# sdtmdates
+# sdtmdates <a href="https://skgithub14.github.io/sdtmdates/"><img src="man/figures/logo.png" align="right" height="139" alt="sdtmdates website" /></a>
 
 <!-- badges: start -->
 
@@ -13,8 +13,8 @@ coverage](https://codecov.io/gh/skgithub14/sdtmdates/branch/main/graph/badge.svg
 The goal of {sdtmdates} is to provide a set of tools for statistical
 programmers to transform raw electronic data cut (EDC) dates into ISO
 8601 formatted dates for Study Data Tabulation Model (SDTM) data sets.
-The tools include utility functions to reshaping, trimming, and imputing
-date values.
+The tools include utility functions for reshaping, trimming, and
+imputing date values.
 
 ## Installation
 
