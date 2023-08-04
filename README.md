@@ -74,8 +74,7 @@ kable(raw_dates)
 First, we will re-arrange the partial dates into the same format as the
 full dates using `reshape_pdates()`. That will let us combine the full
 and partial dates into one column with a MM/DD/YYYY format. Then, using
-`reshape_adates()`, we will converted the dates to the YYYY-MM-DD
-format.
+`reshape_adates()`, we will convert all dates to the YYYY-MM-DD format.
 
 ``` r
 working_dates <- raw_dates %>%
