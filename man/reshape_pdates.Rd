@@ -12,21 +12,24 @@ reshape_pdates(dates, output_sep = "/")
 \item{output_sep}{the date component separate for the output, default is \code{"/"}}
 }
 \value{
-a character vector of partial dates
+a character vector of partial dates in the format \code{"UN/UN/UNKN"}
+(\code{"MM/DD/YYYY"})
 }
 \description{
 Re-arranges partial dates from a format of \code{"UN-UNK-UNKN"} (\code{"DD-MMM-YYYY"})
-to \code{"UN-UN-UNKN"} (\code{"MM/DD/YYYY"}).
+to \code{"UN/UN/UNKN"} (\code{"MM/DD/YYYY"}).
 }
 \details{
 \itemize{
 \item The separator character between dates components for the input vector
-\code{dates} can be any character other than the letters \code{c("U", "N", "K")}
+\code{dates} can be any commonly used date separator (\code{"/"}, \code{"-"}, \code{"."},
+\code{" "}).
 \item In the starting format, the month (\code{"UNK"}) is a three letter abbreviation
 but, in the output format, the month is converted to a number
-\item The output format is a character, not a Date, vector to make some common
-SDTM date operations easier
-\item The case of the input month abbreviation does not matter
+\item The output format is a character vector, not a Date vector, to make some
+common SDTM date workflow operations easier
+\item The case of the input month abbreviation does not matter; \code{"Feb"},
+\code{"feb"}, and \code{"FEB"} will yield the same results
 }
 }
 \examples{

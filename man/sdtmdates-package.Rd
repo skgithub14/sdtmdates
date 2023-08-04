@@ -4,7 +4,7 @@
 \name{sdtmdates-package}
 \alias{sdtmdates}
 \alias{sdtmdates-package}
-\title{sdtmdates: Transform and Impute Full and Partial Dates for SDTM}
+\title{sdtmdates: Transform and Impute Dates for SDTM}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 

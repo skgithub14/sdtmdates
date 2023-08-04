@@ -1,6 +1,6 @@
 Package: sdtmdates
-Title: Transform and Impute Full and Partial Dates for SDTM
-Version: 0.0.0.9000
+Title: Transform and Impute Dates for SDTM
+Version: 0.0.0
 Authors@R: 
     person("Stephen", "Knapp", 
            email = "stephen@knappconsultingllc.com", 

@@ -7,14 +7,14 @@
 trim_dates(dates, input_sep = "-")
 }
 \arguments{
-\item{dates}{a character vector of full or partial dates in the format
-YYYY-MM-DD, for unknown dates it will be a variant of UNKN-UN-UN}
+\item{dates}{a character vector of partial dates in the format \code{"UNKN-UN-UN"}
+(\code{"YYYY-MM-DD"}); full dates can also be included}
 
 \item{input_sep}{the character that separates date components in the input
 vector \code{dates}, default is \code{"-"}}
 }
 \value{
-a character vector of trimmed dates
+a character vector of trimmed partial dates and full dates
 }
 \description{
 Trims \code{"2017-UN-UN"} to \code{"2017"} and trims \code{"2017-05-UN"} to \code{"2017-05"}.

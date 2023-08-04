@@ -1,21 +1,24 @@
 #' Reshape format of partial dates
 #'
 #' Re-arranges partial dates from a format of `"UN-UNK-UNKN"` (`"DD-MMM-YYYY"`)
-#' to `"UN-UN-UNKN"` (`"MM/DD/YYYY"`).
+#' to `"UN/UN/UNKN"` (`"MM/DD/YYYY"`).
 #'
 #' @details
 #'  * The separator character between dates components for the input vector
-#'   `dates` can be any character other than the letters `c("U", "N", "K")`
+#'   `dates` can be any commonly used date separator (`"/"`, `"-"`, `"."`,
+#'   `" "`).
 #'  * In the starting format, the month (`"UNK"`) is a three letter abbreviation
 #'   but, in the output format, the month is converted to a number
-#'  * The output format is a character, not a Date, vector to make some common
-#'   SDTM date operations easier
-#'  * The case of the input month abbreviation does not matter
+#'  * The output format is a character vector, not a Date vector, to make some
+#'   common SDTM date workflow operations easier
+#'  * The case of the input month abbreviation does not matter; `"Feb"`,
+#'   `"feb"`, and `"FEB"` will yield the same results
 #'
 #' @param dates a character vector of partial dates
 #' @param output_sep the date component separate for the output, default is `"/"`
 #'
-#' @returns a character vector of partial dates
+#' @returns a character vector of partial dates in the format `"UN/UN/UNKN"`
+#'  (`"MM/DD/YYYY"`)
 #' @export
 #'
 #' @examples
@@ -65,13 +68,18 @@ reshape_pdates <- function (dates, output_sep = "/") {
 #' Reshape format of all dates (full and partial)
 #'
 #' Re-arranges full and partial dates in the general form of `"MM/DD/YYYY"` to
-#' the ISO 8601 format (`"YYYY-MM-DD"`).
+#' the ISO 8601 format (`"YYYY-MM-DD"`). This function is appropriate for
+#' vectors with mixed full and partial dates because it will not convert the
+#' partial dates to `NA` which would occur if you used
+#' `as.Date("02/UN/2017", format = "%m/%d/%Y")`.
 #'
-#' The date component separator in the input vector `dates` is irrelevant.
+#' The date component separator in the input vector `dates` can be any
+#' character.
 #'
-#' @param dates a character vector of dates
+#' @param dates a character vector of full and/or partial dates
 #'
-#' @returns a character vector of dates
+#' @returns a character vector of full and/or partial dates in the format
+#' `"YYYY-MM-DD"`
 #' @export
 #'
 #' @examples
@@ -172,12 +180,12 @@ impute_pdates <- function (dates, ptype, input_sep = "-") {
 #' the month and day are known are converted to just the year, ie `"2017-UN-01"`
 #' converts to `"2017"`. Full dates are not modified.
 #'
-#' @param dates a character vector of full or partial dates in the format
-#'  YYYY-MM-DD, for unknown dates it will be a variant of UNKN-UN-UN
+#' @param dates a character vector of partial dates in the format `"UNKN-UN-UN"`
+#' (`"YYYY-MM-DD"`); full dates can also be included
 #' @param input_sep the character that separates date components in the input
 #'  vector `dates`, default is `"-"`
 #'
-#' @returns a character vector of trimmed dates
+#' @returns a character vector of trimmed partial dates and full dates
 #' @export
 #'
 #' @examples

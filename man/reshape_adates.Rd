@@ -7,17 +7,22 @@
 reshape_adates(dates)
 }
 \arguments{
-\item{dates}{a character vector of dates}
+\item{dates}{a character vector of full and/or partial dates}
 }
 \value{
-a character vector of dates
+a character vector of full and/or partial dates in the format
+\code{"YYYY-MM-DD"}
 }
 \description{
 Re-arranges full and partial dates in the general form of \code{"MM/DD/YYYY"} to
-the ISO 8601 format (\code{"YYYY-MM-DD"}).
+the ISO 8601 format (\code{"YYYY-MM-DD"}). This function is appropriate for
+vectors with mixed full and partial dates because it will not convert the
+partial dates to \code{NA} which would occur if you used
+\code{as.Date("02/UN/2017", format = "\%m/\%d/\%Y")}.
 }
 \details{
-The date component separator in the input vector \code{dates} is irrelevant.
+The date component separator in the input vector \code{dates} can be any
+character.
 }
 \examples{
 dates <- c("02/05/2017", "UN/UN/2017", "02-05-2017", NA)
