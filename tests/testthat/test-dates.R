@@ -1,15 +1,14 @@
 test_that("Reshape partial dates", {
-
   # an example with default output separator
   dates <- c(
-   "UN-UNK-UNKN",
-   "UN/UNK/UNKN",
-   "UN-UNK-2017",
-   "UN-Feb-2017",
-   "05-Feb-2017",
-   "05-UNK-2017",
-   "05-Feb-UNKN",
-   NA
+    "UN-UNK-UNKN",
+    "UN/UNK/UNKN",
+    "UN-UNK-2017",
+    "UN-Feb-2017",
+    "05-Feb-2017",
+    "05-UNK-2017",
+    "05-Feb-UNKN",
+    NA
   )
   expected_dates <- c(
     "UN/UN/UNKN",
@@ -57,7 +56,6 @@ test_that("Reshape all dates", {
 
 
 test_that("Trim parital dates", {
-
   # an example with default input separator
   dates <- c(
     "UNKN-UN-UN",
@@ -104,7 +102,6 @@ test_that("Trim parital dates", {
 
 
 test_that("Impute start dates", {
-
   # an example with the default input separator
   dates <- c(
     "UNKN-UN-UN",
@@ -148,13 +145,14 @@ test_that("Impute start dates", {
     NA
   )
   expected_dates <- as.Date(expected_dates)
-  expect_equal(impute_pdates(dates, ptype = "start", input_sep = input_sep),
-               expected_dates)
+  expect_equal(
+    impute_pdates(dates, ptype = "start", input_sep = input_sep),
+    expected_dates
+  )
 })
 
 
 test_that("Impute end dates", {
-
   dates <- c(
     "UNKN-UN-UN",
     "2017-UN-UN",
@@ -177,5 +175,4 @@ test_that("Impute end dates", {
   expected_dates <- as.Date(expected_dates)
 
   expect_equal(impute_pdates(dates, ptype = "end"), expected_dates)
-
 })

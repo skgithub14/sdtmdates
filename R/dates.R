@@ -24,18 +24,17 @@
 #'
 #' @examples
 #' dates <- c(
-#'  "UN-UNK-UNKN",
-#'  "UN/UNK/UNKN",
-#'  "UN-UNK-2017",
-#'  "UN-Feb-2017",
-#'  "05-Feb-2017",
-#'  "05-UNK-2017",
-#'  "05-Feb-UNKN",
-#'  NA
+#'   "UN-UNK-UNKN",
+#'   "UN/UNK/UNKN",
+#'   "UN-UNK-2017",
+#'   "UN-Feb-2017",
+#'   "05-Feb-2017",
+#'   "05-UNK-2017",
+#'   "05-Feb-UNKN",
+#'   NA
 #' )
 #' reshape_pdates(dates)
-reshape_pdates <- function (dates, output_sep = "/") {
-
+reshape_pdates <- function(dates, output_sep = "/") {
   # only process non-NA values
   no_NA_dates <- dates[which(!is.na(dates))]
 
@@ -46,8 +45,10 @@ reshape_pdates <- function (dates, output_sep = "/") {
   # convert months to number format
   mths <- stringr::str_sub(no_NA_dates, 4, 6)
   mths <- stringr::str_to_lower(mths)
-  mths[which(mths != "unk")] <- match(mths[which(mths != "unk")],
-                                      stringr::str_to_lower(month.abb))
+  mths[which(mths != "unk")] <- match(
+    mths[which(mths != "unk")],
+    stringr::str_to_lower(month.abb)
+  )
   mths[which(mths == "unk")] <- "UN"
   mths <- stringr::str_pad(mths, width = 2, side = "left", pad = "0")
 
@@ -57,8 +58,9 @@ reshape_pdates <- function (dates, output_sep = "/") {
   # customize the date component separator
   if (output_sep != "/") {
     dates2 <- stringr::str_replace_all(dates2,
-                                       pattern = "\\/",
-                                       replacement = output_sep)
+      pattern = "\\/",
+      replacement = output_sep
+    )
   }
 
   dates[which(!is.na(dates))] <- dates2
@@ -86,8 +88,7 @@ reshape_pdates <- function (dates, output_sep = "/") {
 #' @examples
 #' dates <- c("02/05/2017", "UN/UN/2017", "02-05-2017", NA)
 #' reshape_adates(dates)
-reshape_adates <- function (dates) {
-
+reshape_adates <- function(dates) {
   # only perform on non-NA values
   no_NA_dates <- dates[which(!is.na(dates))]
 
@@ -136,19 +137,18 @@ reshape_adates <- function (dates) {
 #' )
 #' impute_pdates(dates, ptype = "start")
 #' impute_pdates(dates, ptype = "end")
-impute_pdates <- function (dates, ptype, input_sep = "-") {
-
+impute_pdates <- function(dates, ptype, input_sep = "-") {
   # if input separator is not the default, make them the default
   if (input_sep != "-") {
-
     # if the input separator needs to be escaped for regex to find it
     if (input_sep == ".") {
       input_sep <- paste0("\\", input_sep)
     }
 
     dates <- stringr::str_replace_all(dates,
-                                      pattern = input_sep,
-                                      replacement = "-")
+      pattern = input_sep,
+      replacement = "-"
+    )
   }
 
   # return NA for UNKN-UN-UN dates
@@ -202,19 +202,18 @@ impute_pdates <- function (dates, ptype, input_sep = "-") {
 #'   NA
 #' )
 #' trim_dates(dates)
-trim_dates <- function (dates, input_sep = "-") {
-
+trim_dates <- function(dates, input_sep = "-") {
   # input has a non-default date separator, make them the default
   if (input_sep != "-") {
-
     # if the input separator needs to be escaped for regex to find it
     if (input_sep == ".") {
       input_sep <- paste0("\\", input_sep)
     }
 
     dates <- stringr::str_replace_all(dates,
-                                      pattern = input_sep,
-                                      replacement = "-")
+      pattern = input_sep,
+      replacement = "-"
+    )
   }
 
   # convert anything with an unknown year to NA
@@ -225,10 +224,10 @@ trim_dates <- function (dates, input_sep = "-") {
 
   # if the year and days are known but the month is not, only keep the year
   year_and_day <- dates[which(nchar(dates) == 10 &
-                                stringr::str_detect(dates, pattern = "-UN"))]
+    stringr::str_detect(dates, pattern = "-UN"))]
   year_and_day <- stringr::str_sub(year_and_day, 1, 4)
   dates[which(nchar(dates) == 10 &
-                stringr::str_detect(dates, pattern = "-UN"))] <- year_and_day
+    stringr::str_detect(dates, pattern = "-UN"))] <- year_and_day
 
   # drop all unknown months
   dates <- stringr::str_remove(dates, pattern = "-UN$")

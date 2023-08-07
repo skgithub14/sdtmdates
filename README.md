@@ -44,7 +44,7 @@ raw_dates <- data.frame(
     "02-05-2017"
   ),
   raw_partial = c(
-    "UN-UNK-UNKN", 
+    "UN-UNK-UNKN",
     "UN/UNK/UNKN",
     "UN UNK UNKN",
     "UN-UNK-2017",
@@ -103,7 +103,7 @@ For situations where missing date elements should be removed, use the
 `trim_dates()` function.
 
 ``` r
-trimmed_dates <-  mutate(working_dates, trimmed = trim_dates(all))
+trimmed_dates <- mutate(working_dates, trimmed = trim_dates(all))
 kable(trimmed_dates)
 ```
 

@@ -35,14 +35,14 @@ common SDTM date workflow operations easier
 }
 \examples{
 dates <- c(
- "UN-UNK-UNKN",
- "UN/UNK/UNKN",
- "UN-UNK-2017",
- "UN-Feb-2017",
- "05-Feb-2017",
- "05-UNK-2017",
- "05-Feb-UNKN",
- NA
+  "UN-UNK-UNKN",
+  "UN/UNK/UNKN",
+  "UN-UNK-2017",
+  "UN-Feb-2017",
+  "05-Feb-2017",
+  "05-UNK-2017",
+  "05-Feb-UNKN",
+  NA
 )
 reshape_pdates(dates)
 }
