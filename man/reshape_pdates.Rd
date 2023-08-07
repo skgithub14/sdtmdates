@@ -9,7 +9,8 @@ reshape_pdates(dates, output_sep = "/")
 \arguments{
 \item{dates}{a character vector of partial dates}
 
-\item{output_sep}{the date component separate for the output, default is \code{"/"}}
+\item{output_sep}{the date component separator for the output, default is
+\code{"/"}}
 }
 \value{
 a character vector of partial dates in the format \code{"UN/UN/UNKN"}

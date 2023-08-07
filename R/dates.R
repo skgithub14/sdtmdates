@@ -15,10 +15,11 @@
 #'   `"feb"`, and `"FEB"` will yield the same results
 #'
 #' @param dates a character vector of partial dates
-#' @param output_sep the date component separate for the output, default is `"/"`
+#' @param output_sep the date component separator for the output, default is
+#'  `"/"`
 #'
 #' @returns a character vector of partial dates in the format `"UN/UN/UNKN"`
-#'  (`"MM/DD/YYYY"`)
+#' (`"MM/DD/YYYY"`)
 #' @export
 #'
 #' @examples
