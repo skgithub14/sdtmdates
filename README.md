@@ -35,7 +35,6 @@ dates into one ISO 8601 formatted date column.
 ``` r
 library(sdtmdates)
 library(dplyr)
-library(knitr)
 
 raw_dates <- data.frame(
   raw_full = c(
@@ -55,7 +54,7 @@ raw_dates <- data.frame(
     rep(NA, 2)
   )
 )
-kable(raw_dates)
+knitr::kable(raw_dates)
 ```
 
 | raw_full   | raw_partial |
@@ -83,7 +82,7 @@ working_dates <- raw_dates %>%
     all = coalesce(raw_full, partial),
     all = reshape_adates(all)
   )
-kable(working_dates)
+knitr::kable(working_dates)
 ```
 
 | raw_full   | raw_partial | partial    | all        |
@@ -104,7 +103,7 @@ For situations where missing date elements should be removed, use the
 
 ``` r
 trimmed_dates <- mutate(working_dates, trimmed = trim_dates(all))
-kable(trimmed_dates)
+knitr::kable(trimmed_dates)
 ```
 
 | raw_full   | raw_partial | partial    | all        | trimmed    |
@@ -129,7 +128,7 @@ imputed_dates <- working_dates %>%
     start = impute_pdates(all, ptype = "start"),
     end = impute_pdates(all, ptype = "end")
   )
-kable(imputed_dates)
+knitr::kable(imputed_dates)
 ```
 
 | raw_full   | raw_partial | partial    | all        | start      | end        |
