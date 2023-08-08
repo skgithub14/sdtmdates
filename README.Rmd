@@ -40,7 +40,6 @@ In this example, we start with a data frame with two columns, one with full date
 ```{r example1, message=FALSE}
 library(sdtmdates)
 library(dplyr)
-library(knitr)
 
 raw_dates <- data.frame(
   raw_full = c(
@@ -49,7 +48,7 @@ raw_dates <- data.frame(
     "02-05-2017"
   ),
   raw_partial = c(
-    "UN-UNK-UNKN", 
+    "UN-UNK-UNKN",
     "UN/UNK/UNKN",
     "UN UNK UNKN",
     "UN-UNK-2017",
@@ -60,7 +59,7 @@ raw_dates <- data.frame(
     rep(NA, 2)
   )
 )
-kable(raw_dates)
+knitr::kable(raw_dates)
 ```
 
 First, we will re-arrange the partial dates into the same format as the full dates using `reshape_pdates()`. That will let us combine the full and partial dates into one column with a MM/DD/YYYY format. Then, using `reshape_adates()`, we will convert all dates to the YYYY-MM-DD format.
@@ -72,15 +71,15 @@ working_dates <- raw_dates %>%
     all = coalesce(raw_full, partial),
     all = reshape_adates(all)
   )
-kable(working_dates)
+knitr::kable(working_dates)
 ```
 
 
 For situations where missing date elements should be removed, use the `trim_dates()` function.
 
 ```{r example3}
-trimmed_dates <-  mutate(working_dates, trimmed = trim_dates(all))
-kable(trimmed_dates)
+trimmed_dates <- mutate(working_dates, trimmed = trim_dates(all))
+knitr::kable(trimmed_dates)
 ```
 
 
@@ -92,7 +91,7 @@ imputed_dates <- working_dates %>%
     start = impute_pdates(all, ptype = "start"),
     end = impute_pdates(all, ptype = "end")
   )
-kable(imputed_dates)
+knitr::kable(imputed_dates)
 ```
 
 
