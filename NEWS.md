@@ -1,4 +1,4 @@
-# sdtmdates 0.0.0
+# sdtmdates 0.1.0
 
 * Initial package release.
 
