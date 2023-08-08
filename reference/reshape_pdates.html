@@ -12,7 +12,7 @@ to "UN/UN/UNKN" ("MM/DD/YYYY").'><meta property="og:image" content="https://skgi
     
     <a class="navbar-brand me-2" href="../index.html">sdtmdates</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +64,8 @@ to <code>"UN/UN/UNKN"</code> (<code>"MM/DD/YYYY"</code>).</p>
 
 
 <dt>output_sep</dt>
-<dd><p>the date component separate for the output, default is <code>"/"</code></p></dd>
+<dd><p>the date component separator for the output, default is
+<code>"/"</code></p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -93,14 +94,14 @@ common SDTM date workflow operations easier</p></li>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span> <span class="st">"UN-UNK-UNKN"</span>,</span></span>
-<span class="r-in"><span> <span class="st">"UN/UNK/UNKN"</span>,</span></span>
-<span class="r-in"><span> <span class="st">"UN-UNK-2017"</span>,</span></span>
-<span class="r-in"><span> <span class="st">"UN-Feb-2017"</span>,</span></span>
-<span class="r-in"><span> <span class="st">"05-Feb-2017"</span>,</span></span>
-<span class="r-in"><span> <span class="st">"05-UNK-2017"</span>,</span></span>
-<span class="r-in"><span> <span class="st">"05-Feb-UNKN"</span>,</span></span>
-<span class="r-in"><span> <span class="cn">NA</span></span></span>
+<span class="r-in"><span>  <span class="st">"UN-UNK-UNKN"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"UN/UNK/UNKN"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"UN-UNK-2017"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"UN-Feb-2017"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"05-Feb-2017"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"05-UNK-2017"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"05-Feb-UNKN"</span>,</span></span>
+<span class="r-in"><span>  <span class="cn">NA</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">reshape_pdates</span><span class="op">(</span><span class="va">dates</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "UN/UN/UNKN" "UN/UN/UNKN" "UN/UN/2017" "02/UN/2017" "02/05/2017"</span>
